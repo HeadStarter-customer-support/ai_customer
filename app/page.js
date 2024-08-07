@@ -85,7 +85,7 @@ export default function Home() {
       
         <Stack flexDirection={'row'} gap={2}>
           <TextField label="Message" fullWidth value={text} onChange={(event) => setText(event.target.value)} />
-          <Button variant="contained" size="medium" onClick={sendMessage} >Send</Button>
+          <Button variant="contained" size="medium" onClick={sendMessage} sx={{ borderRadius: 7 }} >Send</Button>
         </Stack>
       </Stack>
     </Box>
