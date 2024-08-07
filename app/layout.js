@@ -8,6 +8,17 @@ export const metadata = {
   description: "Welcome to Headstarter AI customer support service",
 };
 
+// export function IndexPage() {
+//   return (
+//     <div>
+//       <Head>
+//         <title>My page title</title>
+//       </Head>
+//       <p>Hello world!</p>
+//     </div>
+//   )
+// }
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
