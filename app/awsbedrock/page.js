@@ -7,7 +7,8 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hi. I am the Headstarter virtual assistant. How can I help you today?',
+      content:
+        'Hi. I am the Headstarter virtual assistant. How can I help you today?',
     },
   ]);
 
@@ -81,7 +82,7 @@ export default function Home() {
         direction={'column'}
         width="600px"
         height="700px"
-        border="1px solid black'
+        border="1px solid black"
         justifyContent="flex-end"
         p={2}
         gap={2}
