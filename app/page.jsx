@@ -1,5 +1,7 @@
 'use client'
-import { Box, Button, TextField, Stack, createTheme, ThemeProvider, CssBaseline  } from "@mui/material";
+import { Box, Button, TextField, Stack, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
@@ -10,8 +12,8 @@ export default function Home() {
 
   const [user] = useAuthState(auth)
   const router = useRouter()
-  const userSession = sessionStorage.getItem('user')
-  console.log(user);
+  // const userSession = sessionStorage.getItem('user')
+  // console.log(userSession);
 
   if (!user) {
     return router.push('/sign-in')
@@ -23,6 +25,16 @@ export default function Home() {
   ])
 
   const [text, setText] = useState('')
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   
   const sendMessage = async () => {
 
@@ -63,7 +75,7 @@ export default function Home() {
     })
   }
 
-  const handleSignOut = () => {
+  const handleSignOut = () => {  
     sessionStorage.removeItem('user')
     router.push('/sign-in')
   }
@@ -98,11 +110,34 @@ export default function Home() {
         flexDirection={'column'}
         alignItems={'center'}
         justifyContent={'center'}
+        gap={5}
       >
-        <Button variant="contained" onClick={() => handleSignOut()} 
-        >
+        <Button variant="contained" onClick={handleClickOpen} >
           Logout
         </Button>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Confirm Logout"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+                Are you sure you want to logout?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleSignOut} color="primary" autoFocus>
+              Logout
+            </Button>
+          </DialogActions>
+        </Dialog>
         <Stack direction={'column'} width='600px' height='700px' border='1px solid #333' borderRadius={5} justifyContent='flex-end' p={1.8} gap={2} bgcolor='background.paper'>
           <Stack direction={'column'} spacing={2} flexGrow={1} overflow={'auto'} maxHeight={'100%'} >
             {
@@ -125,7 +160,7 @@ export default function Home() {
             }
           </Stack>
         
-          <Stack flexDirection={'row'} gap={1}>
+          <Stack flexDirection={'row'} gap={1} >
             <TextField 
               label="Message" 
               fullWidth 
@@ -149,7 +184,7 @@ export default function Home() {
                 },
               }}
             />
-            <Button variant="contained" size="medium" onClick={sendMessage} sx={{ borderRadius: 7 }} >Send</Button>
+            <Button variant="contained" size="medium" endIcon={<SendIcon />} onClick={sendMessage} sx={{ borderRadius: 4 }}  >Send</Button>
           </Stack>
         </Stack>
       </Box>

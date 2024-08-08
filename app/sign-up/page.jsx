@@ -21,6 +21,8 @@ const SignUp = () => {
         try {
             // Handle sign up logic here
             const res = await createUserWithEmailAndPassword(email, password)
+            console.log(res);
+            
             sessionStorage.setItem('user', true)
             console.log('First Name:', firstName);
             console.log('Last Name:', lastName);
