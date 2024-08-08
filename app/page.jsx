@@ -2,7 +2,7 @@
 import { Box, Button, TextField, Stack, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
 import { useRouter } from "next/navigation";
@@ -15,9 +15,11 @@ export default function Home() {
   // const userSession = sessionStorage.getItem('user')
   // console.log(userSession);
 
-  if (!user) {
-    return router.push('/sign-in')
-  }
+  useEffect(() => {
+    if (!user && !sessionStorage.getItem('user')) {
+      return router.push('/sign-in')
+    }
+  }, [user, router]);
   
 
   const [messages, setMessages] = useState([
