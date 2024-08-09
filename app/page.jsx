@@ -3,20 +3,22 @@ import { Box, Button, TextField, Stack, createTheme, ThemeProvider, CssBaseline 
 import SendIcon from '@mui/icons-material/Send';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { useState, useEffect } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
 import { useRouter } from "next/navigation";
+import AuthState from './components/AuthState'
 
 
 export default function Home() {
 
   const [user] = useAuthState(auth)
+  const [signOut] = useSignOut(auth)
   const router = useRouter()
   // const userSession = sessionStorage.getItem('user')
   // console.log(userSession);
 
   useEffect(() => {
-    if (!user && !sessionStorage.getItem('user')) {
+    if (!user ) {
       return router.push('/sign-in')
     }
   }, [user, router]);
@@ -77,8 +79,9 @@ export default function Home() {
     })
   }
 
-  const handleSignOut = () => {  
-    sessionStorage.removeItem('user')
+  const handleSignOut = async () => {  
+    await signOut()
+    // sessionStorage.removeItem('user')
     router.push('/sign-in')
   }
 
@@ -114,7 +117,8 @@ export default function Home() {
         justifyContent={'center'}
         gap={5}
       >
-        <Button variant="contained" onClick={handleClickOpen} >
+        <AuthState />
+        {/* <Button variant="contained" onClick={handleClickOpen} >
           Logout
         </Button>
         <Dialog
@@ -139,7 +143,7 @@ export default function Home() {
               Logout
             </Button>
           </DialogActions>
-        </Dialog>
+        </Dialog> */}
         <Stack direction={'column'} width='600px' height='700px' border='1px solid #333' borderRadius={5} justifyContent='flex-end' p={1.8} gap={2} bgcolor='background.paper'>
           <Stack direction={'column'} spacing={2} flexGrow={1} overflow={'auto'} maxHeight={'100%'} >
             {

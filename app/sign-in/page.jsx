@@ -2,14 +2,16 @@
 import { useState } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import { Backdrop, CircularProgress } from '@mui/material'
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth'
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { auth } from '@/app/firebase/config'
 import { useRouter } from 'next/navigation';
+import GoogleSignIn from '../components/GoogleSignIn'
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth)
+    const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth)
+    const [signInWithGoogle] = useSignInWithGoogle(auth);
     const router = useRouter()
 
     const [open, setOpen] = useState(false)
@@ -25,17 +27,30 @@ const SignIn = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const res = await signInWithEmailAndPassword(email, password)
+            await signInWithEmailAndPassword(email, password)
             sessionStorage.setItem('user', true)
             // console.log('Email:', email);
             // console.log('Password:', password);
             setEmail('')
             setPassword('')
+
+            if (loading) {
+                return <p>Loading...</p>;
+            }
+
+            if (user) {
+            console.log(email);
+            console.log(password);                
+            }
+
             router.push('/')
+
         } catch (err) {
             console.error(err)
         }
     };
+
+
 
     const signUpPage = () => {
         router.push('/sign-up')
@@ -115,6 +130,7 @@ const SignIn = () => {
                 },
                 }}
             />
+            <GoogleSignIn />
             <Button
                 type="submit"
                 fullWidth
