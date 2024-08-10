@@ -3,12 +3,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import Button from '@mui/material/Button';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 
 const AuthState = () => {
     const [user, loading, error] = useAuthState(auth);
     const [open, setOpen] = useState(false);
-
+    const router = useRouter()
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -19,6 +20,7 @@ const AuthState = () => {
 
     const handleSignOut = async () => {
         await auth.signOut();
+        router.push('/sign-in')
     };
 
     if (loading) {
