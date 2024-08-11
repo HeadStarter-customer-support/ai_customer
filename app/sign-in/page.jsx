@@ -6,6 +6,8 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import { auth } from '@/app/firebase/config'
 import { useRouter } from 'next/navigation';
 import GoogleSignIn from '../components/GoogleSignIn'
+import bgImage from '../images/headstarter_bg.jpeg'
+
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -58,7 +60,7 @@ const SignIn = () => {
     }
 
     return (
-        <Container maxWidth="xs">
+        <Container maxWidth="xs" >
         <Box 
             sx={{
             display: 'flex',
@@ -69,6 +71,7 @@ const SignIn = () => {
             backgroundColor: '#333',
             borderRadius: 2,
             boxShadow: 3,
+            backgroundColor: 'black'
             }}
         >
             <Typography component="h1" variant="h5" sx={{ color: '#fff' }}>

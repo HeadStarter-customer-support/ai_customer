@@ -8,7 +8,7 @@ import { auth } from "./firebase/config";
 import { useRouter } from "next/navigation";
 import AuthState from './components/AuthState'
 import ResponsiveAppBar from "./Appbar/AppBar";
-import bgImage from '../images/headstarter_bg.png'
+import bgImage from './images/headstarter_bg.jpeg'
 
 export default function Home() {
 
@@ -109,14 +109,15 @@ export default function Home() {
         justifyContent={'center'}
         gap={5}
         sx={{
-          backgroundImage: `url(${bgImage})`,
+          backgroundImage: `url(${bgImage.src})`,
           backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
         }}
       >
         
         {/* <AuthState /> */}
-        <Stack direction={'column'} width='600px' height='700px' border='1px solid #333' borderRadius={5} justifyContent='flex-end' p={1.8} gap={2} bgcolor='background.paper'>
+        <Stack direction={'column'} width='700px' height='700px' border='1px solid #333' borderRadius={5} justifyContent='flex-end' p={1.8} gap={2} bgcolor='#161616'>
           <Stack direction={'column'} spacing={2} flexGrow={1} overflow={'auto'} maxHeight={'100%'} >
             {
               messages.map((message, index) => (
@@ -126,7 +127,7 @@ export default function Home() {
                   justifyContent={ message.role === 'assistant' ? 'flex-start' : 'flex-end' } 
                 >
                   <Box
-                    bgcolor={ message.role === 'assistant' ? 'primary.main' : 'secondary.main' }
+                    bgcolor={ message.role === 'assistant' ? '#163257' : '#101838' }
                     color={'white'}
                     borderRadius={11}
                     p={2}

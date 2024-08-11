@@ -19,7 +19,6 @@ import { useRouter } from "next/navigation";
 
 
 export default function MenuAppBar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
     const [user, loading, error] = useAuthState(auth);
     const router = useRouter()
@@ -61,7 +60,7 @@ export default function MenuAppBar() {
                     label={isAuthenticated ? 'Logout' : 'Login'}
                 />
             </FormGroup> */}
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: '#121832', boxShadow: 'none' }}>
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -70,51 +69,50 @@ export default function MenuAppBar() {
                         aria-label="menu"
                         sx={{ mr: 2 }}
                     >
-                        <MenuIcon />
+                        {/* <MenuIcon /> */}
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        Menu
+                        Headstarter Customer Support
                     </Typography>
-                    {isAuthenticated && (
-                        <div>
-                            <Stack direction={'row'} alignItems={'center'} gap={2} >
-                            <p>Signed in as: {user?.displayName}</p>
-                            <IconButton
-                                size="small"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                {user?.photoURL ? (
-                                    <img alt='Profile picture' src={user.photoURL} style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid white' }} />
-                                ) : (
-                                    <AccountCircle />
-                                )}      
-                            </IconButton>
-                            </Stack>
-                            
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                                {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
-                            </Menu>
-                        </div>
-                    )}
+                    <Stack direction={'row'} alignItems={'center'} gap={1} >
+                    <p>Signed in as: <strong>{user?.displayName}</strong></p>
+                    <IconButton
+                        size="small"
+                        aria-label="account of current user"
+                        aria-controls="menu-appbar"
+                        aria-haspopup="true"
+                        onClick={handleMenu}
+                        color="inherit"
+                    >
+                        {user?.photoURL ? (
+                            <img alt='Profile picture' src={user.photoURL} style={{ width: 40, height: 40, borderRadius: '50%', border: '1px solid white' }} />
+                        ) : (
+                            <AccountCircle />
+                        )}      
+                    </IconButton>
+                    </Stack>
+                    
+                    <Menu
+                        id="menu-appbar"
+                        anchorEl={anchorEl}
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                        sx={{
+                            borderRadius: 10
+                        }}
+                    >
+                        <MenuItem onClick={handleLogout} >Logout</MenuItem>
+                        {/* <MenuItem onClick={handleClose}>My account</MenuItem> */}
+                    </Menu>
                 </Toolbar>
             </AppBar>
         </Box>

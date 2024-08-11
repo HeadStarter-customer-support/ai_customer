@@ -4,7 +4,6 @@ import { Box, Button, TextField, Typography, Container, Stack } from '@mui/mater
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/app/firebase/config'
 import { useRouter } from 'next/navigation';
-import bgImage from '../images/headstarter_bg.png'
 
 
 const SignUp = () => {
@@ -62,7 +61,7 @@ const SignUp = () => {
                 backgroundColor: '#333',
                 borderRadius: 2,
                 boxShadow: 3,
-                backgroundImage: `url(${bgImage})`
+                backgroundColor: 'black'
             }}
         >
             <Typography component="h1" variant="h5" sx={{ color: '#fff' }}>
