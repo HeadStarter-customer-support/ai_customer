@@ -23,7 +23,7 @@ This repository contains the source code for the AI Chat Support system develope
 
 ## Technologies Used
 
-- **Frontend/Backend:** Next.js
+- **Frontend/Backend:** React/Next.js 
 - **Database & Authentication:** Firebase
 - **Hosting:** AWS
 - **Design:** Material UI
@@ -51,7 +51,7 @@ This repository contains the source code for the AI Chat Support system develope
     - Add the following variables with your API keys:
 
     ```plaintext
-    NEXT_PUBLIC_OPENAI_API_KEY=your-openai-api-key
+    OPENAI_API_KEY=your-openai-api-key
     NEXT_PUBLIC_FIREBASE_API_KEY=your-firebase-api-key
     NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-firebase-auth-domain
     NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-firebase-project-id
