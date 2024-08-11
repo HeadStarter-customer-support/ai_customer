@@ -7,21 +7,22 @@ import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
 import { useRouter } from "next/navigation";
 import AuthState from './components/AuthState'
-
+import ResponsiveAppBar from "./Appbar/AppBar";
+import bgImage from '../images/headstarter_bg.png'
 
 export default function Home() {
 
-  const [user] = useAuthState(auth)
+  // const [user] = useAuthState(auth)
   const [signOut] = useSignOut(auth)
   const router = useRouter()
   // const userSession = sessionStorage.getItem('user')
   // console.log(userSession);
 
-  useEffect(() => {
-    if (!user ) {
-      return router.push('/sign-in')
-    }
-  }, [user, router]);
+  // useEffect(() => {
+  //   if (!user ) {
+  //     return router.push('/sign-in')
+  //   }
+  // }, [user, router]);
   
 
   const [messages, setMessages] = useState([
@@ -30,22 +31,12 @@ export default function Home() {
 
   const [text, setText] = useState('')
 
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   
   const sendMessage = async () => {
 
     setText('')
     setMessages((messages) => [ ...messages, { role: 'user', content: text }, { role: 'assistant', content: '' } ])
 
-    // console.log('Payload:', JSON.stringify({ role: 'user', content: text }));
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -108,6 +99,7 @@ export default function Home() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <ResponsiveAppBar />
       <Box 
         width={'100vw'}
         height={'100vh' } 
@@ -116,34 +108,14 @@ export default function Home() {
         alignItems={'center'}
         justifyContent={'center'}
         gap={5}
+        sx={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
       >
-        <AuthState />
-        {/* <Button variant="contained" onClick={handleClickOpen} >
-          Logout
-        </Button>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">
-            {"Confirm Logout"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-                Are you sure you want to logout?
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleSignOut} color="primary" autoFocus>
-              Logout
-            </Button>
-          </DialogActions>
-        </Dialog> */}
+        
+        {/* <AuthState /> */}
         <Stack direction={'column'} width='600px' height='700px' border='1px solid #333' borderRadius={5} justifyContent='flex-end' p={1.8} gap={2} bgcolor='background.paper'>
           <Stack direction={'column'} spacing={2} flexGrow={1} overflow={'auto'} maxHeight={'100%'} >
             {

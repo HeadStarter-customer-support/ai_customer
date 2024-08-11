@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react';
+import { useState, createContext, useContext } from 'react';
 import { Box, Button, TextField, Typography, Container } from '@mui/material';
 import { Backdrop, CircularProgress } from '@mui/material'
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth'
@@ -11,8 +11,9 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth)
-    const [signInWithGoogle] = useSignInWithGoogle(auth);
     const router = useRouter()
+    const AuthContext = createContext(null);
+
 
     const [open, setOpen] = useState(false)
 

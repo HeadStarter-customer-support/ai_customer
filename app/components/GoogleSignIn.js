@@ -4,14 +4,17 @@ import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import GoogleIcon from '@mui/icons-material/Google';
+import { useRouter } from 'next/navigation';
 
 
 const GoogleSignIn = () => {
     const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const router = useRouter()
 
     const handleSignIn = async () => {
         try {
         await signInWithGoogle();
+        router.push('/')
         } catch (error) {
         console.error('Error signing in with Google:', error);
         }

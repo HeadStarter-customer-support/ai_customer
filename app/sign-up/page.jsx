@@ -4,6 +4,8 @@ import { Box, Button, TextField, Typography, Container, Stack } from '@mui/mater
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth'
 import { auth } from '@/app/firebase/config'
 import { useRouter } from 'next/navigation';
+import bgImage from '../images/headstarter_bg.png'
+
 
 const SignUp = () => {
     const [firstName, setFirstName] = useState('');
@@ -52,14 +54,15 @@ const SignUp = () => {
         <Container maxWidth="xs">
         <Box 
             sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            mt: 8,
-            p: 3,
-            backgroundColor: '#333',
-            borderRadius: 2,
-            boxShadow: 3,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                mt: 8,
+                p: 3,
+                backgroundColor: '#333',
+                borderRadius: 2,
+                boxShadow: 3,
+                backgroundImage: `url(${bgImage})`
             }}
         >
             <Typography component="h1" variant="h5" sx={{ color: '#fff' }}>
