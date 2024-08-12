@@ -1,28 +1,17 @@
 'use client'
 import { Box, Button, TextField, Stack, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
-import { useState, useEffect } from "react";
-import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
+import { useState} from "react";
+import { useSignOut } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
 import { useRouter } from "next/navigation";
-import AuthState from './components/AuthState'
 import ResponsiveAppBar from "./Appbar/AppBar";
 import bgImage from './images/headstarter_bg.jpeg'
 
 export default function Home() {
 
-  // const [user] = useAuthState(auth)
   const [signOut] = useSignOut(auth)
   const router = useRouter()
-  // const userSession = sessionStorage.getItem('user')
-  // console.log(userSession);
-
-  // useEffect(() => {
-  //   if (!user ) {
-  //     return router.push('/sign-in')
-  //   }
-  // }, [user, router]);
   
 
   const [messages, setMessages] = useState([
