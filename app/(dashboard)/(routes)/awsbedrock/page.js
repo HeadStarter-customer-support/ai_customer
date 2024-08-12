@@ -1,10 +1,9 @@
 'use client';
 
-import { Box, Button, TextField, Stack } from '@mui/material';
+import { Box, Button, TextField, Stack, Typography, Rating, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { Code } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Heading from '@/components/Heading';
-import bgImage from '@/public/headstarter_bg.jpeg';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -16,6 +15,9 @@ export default function Home() {
   ]);
 
   const [text, setText] = useState('');
+  const [rating, setRating] = useState(null);
+  const [feedback, setFeedback] = useState('');
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   const messagesEndRef = useRef(null);
 
@@ -72,6 +74,34 @@ export default function Home() {
     });
   };
 
+  const openFeedbackDialog = () => {
+    setFeedbackOpen(true);
+  };
+
+  const closeFeedbackDialog = () => {
+    setFeedbackOpen(false);
+    setRating(null);
+    setFeedback('');
+  };
+
+  const submitFeedback = async () => {
+    const feedbackData = {
+      rating,
+      feedback,
+      message: messages[messages.length - 1].content,
+    };
+
+    await fetch('/api/feedback', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(feedbackData),
+    });
+
+    closeFeedbackDialog();
+  };
+
   return (
     <Box
       width={'100vw'}
@@ -80,22 +110,14 @@ export default function Home() {
       flexDirection={'column'}
       alignItems={'center'}
       justifyContent={'center'}
-      sx={{
-        backgroundImage: `url(${bgImage.src})`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      }}
-      p={6}
     >
-      {/* <Heading
+      <Heading
         title="Code Generation"
         description="Generate code using descriptive text"
         icon={Code}
         iconColor="text-green-700"
         bgColor="bg-green-700/10"
-      /> */}
-
+      />
       <Stack
         direction={'column'}
         width="600px"
@@ -153,8 +175,50 @@ export default function Home() {
           <Button variant="contained" size="medium" onClick={sendMessage}>
             Send
           </Button>
+          <Button variant="outlined" size="medium" onClick={openFeedbackDialog}>
+            Feedback
+          </Button>
         </Stack>
       </Stack>
+
+      <Dialog open={feedbackOpen} onClose={closeFeedbackDialog}>
+        <DialogTitle>Provide Your Feedback</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Rate the Assistant's Response and provide additional feedback.
+          </DialogContentText>
+          <Rating
+            name="feedback-rating"
+            value={rating}
+            onChange={(event, newValue) => {
+              setRating(newValue);
+            }}
+            sx={{ mt: 2 }}
+          />
+          <TextField
+            label="Your Feedback"
+            fullWidth
+            multiline
+            rows={4}
+            value={feedback}
+            onChange={(event) => setFeedback(event.target.value)}
+            sx={{ mt: 2 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closeFeedbackDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={submitFeedback}
+            color="primary"
+            disabled={!rating || !feedback.trim()}
+          >
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+
     </Box>
   );
 }
