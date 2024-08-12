@@ -33,15 +33,26 @@ const tools = [
 const DashboardPage = () => {
   const router = useRouter();
   return (
-    <div>
+    <div
+      className="min-h-screen w-full relative"
+      style={{
+        backgroundImage: 'url("/headstarter_bg.jpeg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <div className="absolute top-4 right-4">
+        <UserButton afterSignOutUrl="/" />
+      </div>
+
       <div className="mb-8 space-y-4">
-        <h2 className="text-2xl md:text-4xl font-bold text-center mt-20">
+        <h2 className="text-2xl md:text-4xl font-bold text-center pt-40 text-sky-300">
           Explore the power of AI
         </h2>
         <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
           Chat with the smartest AI - Experience the power of AI
         </p>
-        <UserButton afterSignOutUrl="/" />
       </div>
 
       <div className="px-4 md:px-20 lg:px-32 space-y-4">

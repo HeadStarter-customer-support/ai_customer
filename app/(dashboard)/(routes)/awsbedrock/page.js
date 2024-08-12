@@ -4,6 +4,7 @@ import { Box, Button, TextField, Stack } from '@mui/material';
 import { Code } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import Heading from '@/components/Heading';
+import bgImage from '@/public/headstarter_bg.jpeg';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -79,14 +80,22 @@ export default function Home() {
       flexDirection={'column'}
       alignItems={'center'}
       justifyContent={'center'}
+      sx={{
+        backgroundImage: `url(${bgImage.src})`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+      }}
+      p={6}
     >
-      <Heading
+      {/* <Heading
         title="Code Generation"
         description="Generate code using descriptive text"
         icon={Code}
         iconColor="text-green-700"
         bgColor="bg-green-700/10"
-      />
+      /> */}
+
       <Stack
         direction={'column'}
         width="600px"

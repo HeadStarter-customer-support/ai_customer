@@ -1,19 +1,19 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+import LandingNavbar from '@/components/LandingNavbar';
+import LandingHero from '@/components/LandingHero';
 
 export const LandingPage = () => {
   return (
-    <div>
-      Landing Page(Unprotected)
-      <div>
-        <Link href="/sign-in">
-          <Button>Login</Button>
-        </Link>
-
-        <Link href="/sign-up">
-          <Button>Register</Button>
-        </Link>
-      </div>
+    <div
+      className="min-h-screen w-full relative"
+      style={{
+        backgroundImage: 'url("/headstarter_bg.jpeg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <LandingNavbar />
+      <LandingHero />
     </div>
   );
 };
