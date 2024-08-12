@@ -33,7 +33,7 @@ This repository contains the source code for the AI Chat Support system develope
 2. **Clone the repository** to your local machine:
 
     ```bash
-    git clone https://github.com/your-username/headstarter-ai-chat-support.git
+    git clone [https://github.com/your-username/headstarter-ai-chat-support.git](https://github.com/Headstarter-fellowship-projects/ai_customer/tree/Deep)
     cd headstarter-ai-chat-support
     ```
 
