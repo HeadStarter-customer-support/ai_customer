@@ -11,8 +11,6 @@ This repository contains the source code for the AI Chat Support system develope
 - [Running the Project](#running-the-project)
 - [Project Structure](#project-structure)
 - [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
