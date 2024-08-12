@@ -79,3 +79,11 @@ This repository contains the source code for the AI Chat Support system develope
 ├── .env.local
 ├── package.json
 └── README.md
+
+## Screenshots
+
+![Signup](app\images\signup_page.png)
+
+![Signin](app\images\signin_page.png)
+
+![Main](app\images\main_page.png)
